@@ -15,7 +15,7 @@ namespace DelegateExample
             var example2 = new DelegateExample2();
             example2.RunExample();
             Console.WriteLine("==================");
-
+             
             Console.WriteLine("DelegateExample3");
             var example3 = new DelegateExample3();
             example3.RunExample();
