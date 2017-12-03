@@ -6,15 +6,46 @@ namespace DelegateExample
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("DelegateExample");
             var example = new DelegateExample();
             example.RunExample();
+            Console.WriteLine("==================");
 
+            Console.WriteLine("DelegateExample2");
             var example2 = new DelegateExample2();
             example2.RunExample();
+            Console.WriteLine("==================");
 
+            Console.WriteLine("DelegateExample3");
             var example3 = new DelegateExample3();
             example3.RunExample();
+            Console.WriteLine("==================");
 
+            Console.WriteLine("UsingLambdaExpressions");
+            var example4 = new UsingLambdaExpressions();
+            example4.RunExample();
+            Console.WriteLine("==================");
+
+            Console.WriteLine("UsingLambdaExpressionsWithMultipleStatements");
+            var example5 = new UsingLambdaExpressionsWithMultipleStatements();
+            example5.RunExample();
+            Console.WriteLine("==================");
+
+            Console.WriteLine("UsingBuiltInFunction");
+            var example6 = new UsingBuiltInFunction();
+            example6.RunExample();
+            Console.WriteLine("==================");
+
+            Console.WriteLine("UsingBuiltInAction");
+            var example7 = new UsingBuiltInAction();
+            example7.RunExample();
+            Console.WriteLine("==================");
+
+
+
+
+            Console.ReadKey();
+            Console.WriteLine();
         }
     }
 
@@ -92,4 +123,91 @@ namespace DelegateExample
         }
     }
 
+    class UsingLambdaExpressions
+    {
+
+        public delegate int Calculate(int x, int y);
+
+        public void RunExample()
+        {
+            Calculate add = (x, y) => x + y;
+            Console.WriteLine(add(1, 2));
+
+            Calculate mult = (x, y) => x * y;
+            Console.WriteLine(mult(1, 2));
+
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+    }
+
+    class UsingLambdaExpressionsWithMultipleStatements
+    {
+
+        public delegate int Calculate(int x, int y);
+
+        public void RunExample()
+        {
+            Calculate add = (x, y) =>
+            {
+                Console.WriteLine("add");
+                return x + y;
+            };
+            Console.WriteLine(add(1, 2));
+
+            Calculate mult = (x, y) =>
+            {
+                Console.WriteLine("mult");
+                return x * y;
+            };
+            Console.WriteLine(mult(1, 2));
+
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+    }
+
+    class UsingBuiltInFunction
+    {
+        public void RunExample()
+        {
+            Func<int, int, int> add = (x, y) =>
+            {
+                Console.WriteLine("add");
+                return x + y;
+            };
+            Console.WriteLine(add(1, 2));
+
+            Func<int, int, int> mult = (x, y) =>
+            {
+                Console.WriteLine("mult");
+                return x * y;
+            };
+            Console.WriteLine(mult(1, 2));
+
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+    }
+
+    class UsingBuiltInAction
+    {
+        public void RunExample()
+        {
+            Action<int, int> add = (x, y) =>
+            {
+                Console.WriteLine("Action add");
+            };
+            add(1, 2);
+
+            Action<int, int> mult = (x, y) =>
+            {
+                Console.WriteLine("Action mult");
+            };
+            mult(1, 2);
+
+            Console.ReadKey();
+            Console.WriteLine();
+        }
+    }
 }
