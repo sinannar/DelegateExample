@@ -15,7 +15,7 @@ namespace EventsandCallbacks
             var example2 = new DelegateExample2();
             example2.RunExample();
             Console.WriteLine("==================");
-             
+
             Console.WriteLine("DelegateExample3");
             var example3 = new DelegateExample3();
             example3.RunExample();
@@ -45,6 +45,11 @@ namespace EventsandCallbacks
             Console.WriteLine("UsingEvents");
             var example8 = new UsingEvents();
             example8.RunExample();
+            Console.WriteLine("==================");
+
+            Console.WriteLine("UsingEvents2");
+            var example9 = new UsingEvents2();
+            example9.RunExample();
             Console.WriteLine("==================");
 
 
@@ -237,6 +242,7 @@ namespace EventsandCallbacks
             Pub p = new Pub();
             p.OnChange += () => Console.WriteLine("Event Raised to method 1");
             p.OnChange += () => Console.WriteLine("Event Raised to method 2");
+            //p.OnChange = () => Console.WriteLine("Event Raised to method 2"); //This is legid code
             p.OnChange += () => Console.WriteLine("Event Raised to method 3");
             p.OnChange += () =>
             {
@@ -244,6 +250,49 @@ namespace EventsandCallbacks
                 Console.WriteLine("Event Raised to method 5");
             };
             p.Raise();
+            //p.OnChange(); //This is legid code
         }
     }
+    /*
+        A popular design pattern called publish - subscribe is part of events. You can subscribe to an event and then you are notified when the publisher of the event raises a new event.
+        Delegates from the basis for the event system in C#. Above we can see the example of this usage.
+        At Runexample of UsingEvents class, code creates a new instance of Pub, subscribe to event with different methods and then raises the event by p. Pub class is completely unaware of subscribers.
+        If there was no subscriber, the null check would prevent the error so there is check happens on Pub.
+        This system works, but you can delete previous subscriber easily with using = instead of += so this is one down side of this implementations.
+        Second weakness is outside of Pub, we can directly call p.OnChange to raise new event instead of calling p.Raise to let P handle it. C# use special event keyword to handle this.
+     */
+
+    class Pub2
+    {
+        public event Action OnChange = delegate { };
+
+        public void Raise()
+        {
+            OnChange();
+        }
+    }
+
+    class UsingEvents2
+    {
+        public void RunExample()
+        {
+            Pub2 p = new Pub2();
+            p.OnChange += () => Console.WriteLine("Event Raised to method 1");
+            p.OnChange += () => Console.WriteLine("Event Raised to method 2");
+            //p.OnChange = () => Console.WriteLine("Event Raised to method 2"); //This give compile error
+            p.OnChange += () => Console.WriteLine("Event Raised to method 3");
+            p.OnChange += () =>
+            {
+                Console.WriteLine("Event Raised to method 4");
+                Console.WriteLine("Event Raised to method 5");
+            };
+            p.Raise();
+            //p.OnChange(); //This is give compile error
+        }
+    }
+
+    /*
+        So we change Pub class to re implement as Pub2 with event with this 2 problem. Direc assignment is not valid also eventhought OnChange is public, outside of class they can not invoke it.
+        Initialising OnChange with delegate{} will let me decrease the code because it is initialised so it can not be null anymore.
+     */
 }
