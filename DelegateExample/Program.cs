@@ -454,7 +454,7 @@ namespace EventsandCallbacks
 
         public void Raise()
         {
-            var exceptions = new List<Exception>();
+            var exceptions = new List<Exception>(); 
             foreach(Delegate handler in OnChange.GetInvocationList())
             {
                 try
