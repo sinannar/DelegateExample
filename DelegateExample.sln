@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateExample", "DelegateExample\DelegateExample.csproj", "{F96D7165-339C-4B08-A1F1-8B3370BDC799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAndCallbacks", "DelegateExample\EventAndCallbacks.csproj", "{F96D7165-339C-4B08-A1F1-8B3370BDC799}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

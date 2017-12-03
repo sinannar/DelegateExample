@@ -42,6 +42,12 @@ namespace DelegateExample
             Console.WriteLine("==================");
 
 
+            Console.WriteLine("UsingEvents");
+            var example8 = new UsingEvents();
+            example8.RunExample();
+            Console.WriteLine("==================");
+
+
 
 
             Console.ReadKey();
@@ -208,6 +214,36 @@ namespace DelegateExample
 
             Console.ReadKey();
             Console.WriteLine();
+        }
+    }
+
+    class Pub
+    {
+        public Action OnChange { get; set; }
+
+        public void Raise()
+        {
+            if (OnChange != null)
+            {
+                OnChange();
+            }
+        }
+    }
+
+    class UsingEvents
+    {
+        public void RunExample()
+        {
+            Pub p = new Pub();
+            p.OnChange += () => Console.WriteLine("Event Raised to method 1");
+            p.OnChange += () => Console.WriteLine("Event Raised to method 2");
+            p.OnChange += () => Console.WriteLine("Event Raised to method 3");
+            p.OnChange += () =>
+            {
+                Console.WriteLine("Event Raised to method 4");
+                Console.WriteLine("Event Raised to method 5");
+            };
+            p.Raise();
         }
     }
 }
