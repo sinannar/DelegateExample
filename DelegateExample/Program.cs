@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DelegateExample
+namespace EventsandCallbacks
 {
     class Program
     {
